@@ -1,0 +1,22 @@
+services:
+  whisper:
+    container_name: whisper
+    restart: unless-stopped
+    build:
+      context: .
+    group_add:
+      - video
+    volumes:
+      - ./data:/data
+    command:
+      - --download-dir
+      - /data
+      - --language
+      - en
+      - --device
+      - cuda
+    ports:
+      - 10300:10300
+    devices:
+      - "/dev/dri"
+      - "/dev/kfd"
